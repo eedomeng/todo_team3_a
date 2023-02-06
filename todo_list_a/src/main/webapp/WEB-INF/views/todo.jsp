@@ -11,6 +11,7 @@
     <script defer src="${context}/resources/js/todo/todo.js"></script>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/include/header.jsp" %>
     <div class="weather row"></div>
     <div class="contents row">
         <div class="todo col">
@@ -26,4 +27,5 @@
         <ul class="todo-list row" id="todoList"></ul>
     </div>
     <div class="bg-location"></div>
+<%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>

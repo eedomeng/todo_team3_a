@@ -74,8 +74,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberController {
 	
-	private final MemberService memberService = null; // 퀵픽스
-	private final SignUpFormValidator signUpFormValidator = new SignUpFormValidator();// 퀵픽스
+	private final MemberService memberService;
+	private final SignUpFormValidator signUpFormValidator;
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	

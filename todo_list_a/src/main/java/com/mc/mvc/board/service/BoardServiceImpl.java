@@ -32,9 +32,9 @@ public class BoardServiceImpl implements BoardService{
 
 	Logger logger =  LoggerFactory.getLogger(this.getClass());
 	
-	private final BoardRepository boardRepository = null; // null 대입하여 급한불끄기
-	private final FileRepository fileRepository = null;// null 대입하여 급한불끄기
-	private final FileUtil fileUtil = new FileUtil(); // quick fix
+	private final BoardRepository boardRepository;
+	private final FileRepository fileRepository;
+	private final FileUtil fileUtil;
 
 	@Override
 	public void insertBoard(Board board, List<MultipartFile> files) {

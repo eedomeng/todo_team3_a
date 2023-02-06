@@ -28,10 +28,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService{
 	
-	private final MailSender sender = new MailSender(); // 퀵픽스
-	private final RestTemplate restTemplate = new RestTemplate();// 퀵픽스
-	private final MemberRepository memberRepository = null;// 퀵픽스
-	private final PasswordEncoder passwordEncoder = null;// 퀵픽스
+	private final MailSender sender;
+	private final RestTemplate restTemplate;
+	private final MemberRepository memberRepository;
+	private final PasswordEncoder passwordEncoder;
 	
 	@Override
 	public boolean existUser(String userId) {

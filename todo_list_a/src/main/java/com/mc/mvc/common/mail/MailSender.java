@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MailSender {
 	
-	private final JavaMailSender mailSender = null;// null 초기화
+	private final JavaMailSender mailSender;
 	
 	public void send(String to, String subject, String html) {
 		

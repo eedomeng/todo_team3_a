@@ -20,7 +20,7 @@ public class SignUpFormValidator implements Validator{
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	private final MemberRepository memeberRepository = null;// 퀵픽스
+	private final MemberRepository memeberRepository;
 
 	@Override
 	public boolean supports(Class<?> clazz) {

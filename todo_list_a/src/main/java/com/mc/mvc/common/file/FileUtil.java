@@ -20,7 +20,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class FileUtil {
 	
-	private final FileRepository fileRepository = null;// null 초기화
+	private final FileRepository fileRepository;
 	
 	public void uploadFile(FileInfo fileInfo, List<MultipartFile> files) {
 		
