@@ -6,7 +6,8 @@
 
 <%@ include file="/WEB-INF/views/include/header.jsp" %>
 <div class="container wrap_content">
-	<h1>Hello Spring!</h1>
+	  <h1>hi</h1>
+	  <h2>hi</h2>
 </div>
 <%@ include file="/WEB-INF/views/include/footer.jsp" %>
 </body>
