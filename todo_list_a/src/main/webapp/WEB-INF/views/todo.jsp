@@ -9,8 +9,6 @@
     <%-- <link href="${path}/resources/css/reset.css" rel="stylesheet"> --%>
     <link href="${context}/resources/css/todo/todo.css" rel="stylesheet">
     <script defer src="${context}/resources/js/todo/todo.js"></script>
-    <script defer src="${context}/resources/js/todo/weather-api.js"></script>
-    <script defer src="${context}/resources/js/todo/unsplash-api.js"></script>
 </head>
 <body>
     <div class="weather row"></div>
