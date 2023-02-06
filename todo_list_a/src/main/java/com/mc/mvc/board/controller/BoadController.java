@@ -36,7 +36,7 @@ public class BoadController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	private final BoardService boardService = null; // null 초기화
+	private final BoardService boardService = null; // quick fix
 	
 	@GetMapping("board-form")
 	public void boardForm() {}
