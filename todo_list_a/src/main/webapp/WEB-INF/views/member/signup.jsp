@@ -2,69 +2,58 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include/head.jsp" %>
 
-<%-- signup 페이지에서만 사용할 head태그의 추가 내용 --%>
 <head>
-	<style type="text/css">
-		.valid_info{
-			display:block; 
-			color:red;
-			font-size: 0.5vw;
-		}
-	</style>
+	<link href="${context}/resources/css/member/signup.css" rel="stylesheet">
 </head>
 
-<body>
-<%@ include file="/WEB-INF/views/include/header.jsp" %>
 
-<div class="container wrap_content">
-	<h1>회원 가입 양식</h1>
-	
+<body>
+
+
+<div class="form">
    <form:form action="${context}/member/signup" method="post" id="frmJoin"
    	modelAttribute="signUpForm" >
-      <table>
-        <tr>
-           <td>ID : </td>
-           <td>
-           	  <input type="text" name="userId" id="inpId" size="10" required/>
+   	
+   		<div class="title">Welcome</div>
+        <div class="subtitle">Let's create your account!</div>
+        
+        	<div class="input-container ic1">
+           	  <input type="text" name="userId" id="inpId" class="input" size="10" placeholeder=" " required/>
               <button type="button" id="btnIdCheck">check</button>
               <span class="valid_info" id="idCheck"></span>
+              <div class="cut"></div>
+              <label for="firstname" class="placeholder">Id</label>
               <!-- path: 필드명 -->
               <form:errors path="userId" cssClass="valid_info"/>
-           </td>
-        </tr>
-        <tr>
-           <td>PASSWORD : </td>
-           <td>
-           	  <input type="password" name="password" id="pw" required/>
+            </div>
+        
+        	<div class="input-container ic2">
+           	  <input type="password" name="password" id="pw" class="input" placeholeder=" " required/>
            	  <span id="pw_confirm" class="valid_info"></span>
+           	  <div class="cut"></div>
+              <label for="lastname" class="placeholder">password</label>
            	  <form:errors path="password" cssClass="valid_info"/>
-           </td>
-        </tr>
-        <tr>
-           <td>휴대폰번호 : </td>
-           <td>
-           	  <input type="tel" name="tell" required/>
+        	</div>
+        
+        	<div class="input-container ic2">
+           	  <input type="tel" name="tell" class="input" placeholeder=" " required/>
+           	  <div class="cut"></div>
+              <label for="lastname" class="placeholder">password</label>
            	  <form:errors path="tell" cssClass="valid_info"/>
-           </td>
-        </tr>
-        <tr>
-           <td>email : </td>
-           <td>
-           	  <input type="email" name="email" required/>
+         	</div>
+        
+        	<div class="input-container ic2">
+           	  <input type="email" name="email" class="input" placeholeder=" " required/>
+           	  <div class="cut cut-short"></div>
+              <label for="email" class="placeholder">Email</>
            	  <form:errors path="email" cssClass="valid_info"/>
-           </td>
-        </tr>
-        <tr>
-           <td>
-              <input type="submit" value="가입" />
-              <input type="reset" value="취소" />
-           </td>
-       </tr>
-   </table>
+        	</div>
+        	
+              <button type="submit" class="submit" value="가입">submit</button>
+   
    </form:form>
-
 </div>
-<%@ include file="/WEB-INF/views/include/footer.jsp" %>
+
 
 
 
