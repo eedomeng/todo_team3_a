@@ -166,7 +166,7 @@ public class MemberController {
 		}
 		
 		session.setAttribute("auth", auth);
-		return "redirect:/index";
+		return "redirect:/board/list";
 	}
 	
 	@GetMapping("mypage")

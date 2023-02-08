@@ -10,16 +10,16 @@ import com.mc.mvc.common.file.FileInfo;
 
 public interface BoardService {
 
-	void insertBoard(Board board, List<MultipartFile> files);
+   void insertBoard(Board board);
 
-	FileInfo selectFileInfo(String fIdx);
+   FileInfo selectFileInfo(String fIdx);
 
-	Map<String, Object> selectBoardList(int page);
+   Map<String, Object> selectBoardList(int page, String userId);
 
-	Map<String, Object> selectBoardContentByBdIdx(int bdIdx);
+   Map<String, Object> selectBoardContentByBdIdx(int bdIdx);
 
-	void deleteBoardByBdIdx(int bdIdx);
+   void deleteBoardByBdIdx(int bdIdx);
 
-	void updateBoard(Board board, List<MultipartFile> fileList, List<String> delFiles);
+   void updateBoard(Board board);
 
 }

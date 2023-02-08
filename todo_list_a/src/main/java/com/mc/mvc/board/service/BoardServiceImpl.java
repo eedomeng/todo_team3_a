@@ -30,116 +30,86 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService{
 
-	Logger logger =  LoggerFactory.getLogger(this.getClass());
-	
-	private final BoardRepository boardRepository;
-	private final FileRepository fileRepository;
-	private final FileUtil fileUtil;
+   Logger logger =  LoggerFactory.getLogger(this.getClass());
+   
+   private final BoardRepository boardRepository;
+   private final FileRepository fileRepository;
+   private final FileUtil fileUtil;
 
-	@Override
-	public void insertBoard(Board board, List<MultipartFile> files) {
-		
-		// 1. 게시글 내용을 board테이블에 insert
-		boardRepository.insertBoard(board);
-		
-		// 2. 파일 업로드
-		FileInfo fileInfo = new FileInfo();
-		fileInfo.setGroupName("board");
-		fileInfo.setGnIdx(board.getBdIdx());
-		fileUtil.uploadFile(fileInfo, files);
-		
-	}
+   @Override
+   public void insertBoard(Board board) {
+      
+      // 1. 게시글 내용을 board테이블에 insert
+      boardRepository.insertBoard(board);   
+   }
 
-	@Override
-	public FileInfo selectFileInfo(String flIdx) {
-		FileInfo fileInfo = fileRepository.selectFileInfo(flIdx);
-		return fileInfo;
-	}
+   @Override
+   public FileInfo selectFileInfo(String flIdx) {
+      FileInfo fileInfo = fileRepository.selectFileInfo(flIdx);
+      return fileInfo;
+   }
 
-	@Override
-	public Map<String,Object> selectBoardList(int page) {
-		
-		int total = boardRepository.countAllBoard();
-		
-		Paging paging = Paging.builder()
-						.cntPerPage(10)
-						.currentPage(page)
-						.total(total)
-						.blockCnt(10)
-						.build();
-		
-		return Map.of("boardList",boardRepository.selectBoardList(paging),"paging", paging);
-	}
+   @Override
+   public Map<String,Object> selectBoardList(int page, String userId) {
+      	   
+	   // 해당아이디의 게시물 수
+      int total = boardRepository.countUserBoard(userId);
+      
+      Paging paging = Paging.builder()
+                  .cntPerPage(10)
+                  .currentPage(page)
+                  .total(total)
+                  .blockCnt(10)
+                  .build();
+      
+      return Map.of("boardList", boardRepository.selectBoardList(paging),"paging", paging);
+   }
 
-	@Override
-	public Map<String, Object> selectBoardContentByBdIdx(int bdIdx) {
-		Board board = boardRepository.selectBoardByBdIdx(bdIdx);
-		List<FileInfo> files = fileRepository.selectFileWithGroup(Map.of("groupName","board", "gnIdx", board.getBdIdx()));
-		return Map.of("board", board, "files", files);
-	}
+   @Override
+   public Map<String, Object> selectBoardContentByBdIdx(int bdIdx) {
+      Board board = boardRepository.selectBoardByBdIdx(bdIdx);
 
-	@Override
-	public void deleteBoardByBdIdx(int bdIdx) {
-		
-		// 1. 게시글 삭제
-		boardRepository.deleteBoardByBdIdx(bdIdx);
-		
-		// 2. 게시글에 첨부된 파일 삭제
-		List<FileInfo> files = fileRepository.selectFileWithGroup(Map.of("groupName", "board", "gnIdx", bdIdx));
-		
-		fileRepository.deleFileByGroup(Map.of("groupName", "board", "gnIdx", bdIdx));
+      return Map.of("board", board);
+   }
 
-		for (FileInfo fileInfo : files) {
-			new File(fileInfo.getFullPath()).delete();
-		}
-	}
+   @Override
+   public void deleteBoardByBdIdx(int bdIdx) {
+      
+      // 1. 게시글 삭제
+      boardRepository.deleteBoardByBdIdx(bdIdx);
+   }
 
-	@Override
-	public void updateBoard(Board board, List<MultipartFile> mfs, List<String> delFiles) {
-		
-		int res = boardRepository.updateBoard(board);
-		
-		logger.info("{}", board);
-		logger.info("result : {}", res);
-		if(res == 0) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);
-		
-		List<FileInfo> files = new ArrayList<FileInfo>();
-		
-		for (String flIdx : delFiles) {
-			files.add(fileRepository.selectFileInfo(flIdx));
-			fileRepository.delFileByFlIdx(flIdx);
-		}
-		
-		for (FileInfo fileInfo : files) {
-			new File(fileInfo.getFullPath()).delete();
-		}
-		
-		FileInfo fileInfo = new FileInfo();
-		fileInfo.setGroupName("board");
-		fileInfo.setGnIdx(board.getBdIdx());
-		
-		fileUtil.uploadFile(fileInfo, mfs);
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+   @Override
+   public void updateBoard(Board board) {
+      
+      int res = boardRepository.updateBoard(board);
+      
+      logger.info("{}", board);
+      logger.info("result : {}", res);
+      if(res == 0) throw new AuthException(ErrorCode.UNAUTHORIZED_REQUEST);
+      
+   }
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
 }

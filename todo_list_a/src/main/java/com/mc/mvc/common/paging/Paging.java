@@ -5,7 +5,7 @@ public class Paging {
 	private int currentPage; //현재 페이지
 	private int total;		//전체 게시물
 	private int cntPerPage; //페이지당 게시물 수
-	private int blockCnt;  //하단에 표시될 페이지 블록 개수
+	private int blockCnt;  //하단에 표시될 페이지 블록 개수        == 		isDel==0 인 행의 개수
 	private String sortColumn;   //정렬기준
 	private String sortDirection; //정렬 방향
 	
@@ -13,9 +13,9 @@ public class Paging {
 	private int nextPage;
 	private int lastPage;
 	
-	private int blockStart;
-	private int blockEnd;
 	
+	private int blockStart; 
+	private int blockEnd;
 	private int start;
 
 	private Paging(Builder builder) {
@@ -35,6 +35,10 @@ public class Paging {
 //		5 = blockCnt;
 //		n = ((page-1)/blockCnt)
 //		5n + 1 =  ((page-1)/blockCnt) * blockCnt + 1 
+		
+		
+		
+		this.blockCnt = 5; // 블럭 개수 임의제한
 		this.blockStart = ((currentPage-1)/blockCnt) * blockCnt + 1 ;
 		this.blockEnd = blockStart + blockCnt > lastPage ? lastPage : blockStart + blockCnt -1;
 	}
@@ -126,6 +130,7 @@ public class Paging {
 		}
 		
 		public Builder blockCnt(int blockCnt) {
+
 			this.blockCnt = blockCnt;
 			return this;
 		}
@@ -133,6 +138,7 @@ public class Paging {
 		public Paging build() {
 			return new Paging(this);
 		}
+		
 		
 	}
 	
